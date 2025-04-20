@@ -33,7 +33,7 @@ public class ProjectSecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withUsername("achraf").password("{noop}MyS3cur3P@ssw0rd!").authorities("read").build();
         UserDetails admin = User.withUsername("admin")
-                .password("{bcrypt}$2a$12$88.f6upbBvy0okEa7OfHFuorV29qeK.sVbB9VQ6J6dWM1bW6Qef8m")
+                .password("{bcrypt}$2a$12$gl2gejtdn7VgOI7L523rMu6qCM5w15sWwRLndpX7LRiPX4zFNMS9i")  //pass : 3{0Df0*Ox%Eg
                 .authorities("admin").build();
         return new InMemoryUserDetailsManager(user, admin);
     }
