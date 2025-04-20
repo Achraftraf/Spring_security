@@ -10,8 +10,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
+
+import javax.sql.DataSource;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -29,14 +32,21 @@ public class ProjectSecurityConfig {
         http.httpBasic(withDefaults());
         return http.build();
     }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user = User.withUsername("achraf").password("{noop}MyS3cur3P@ssw0rd!").authorities("read").build();
+//        UserDetails admin = User.withUsername("admin")
+//                .password("{bcrypt}$2a$12$gl2gejtdn7VgOI7L523rMu6qCM5w15sWwRLndpX7LRiPX4zFNMS9i")  //pass : 3{0Df0*Ox%Eg
+//                .authorities("admin").build();
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
+
     @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("achraf").password("{noop}MyS3cur3P@ssw0rd!").authorities("read").build();
-        UserDetails admin = User.withUsername("admin")
-                .password("{bcrypt}$2a$12$gl2gejtdn7VgOI7L523rMu6qCM5w15sWwRLndpX7LRiPX4zFNMS9i")  //pass : 3{0Df0*Ox%Eg
-                .authorities("admin").build();
-        return new InMemoryUserDetailsManager(user, admin);
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource); //achraf@admin1234  -> $2a$12$Z0z25D.FQpJHSeH3t.H./uDabOEpK.Tjvta6s6zptZW66lfVbQnOq
+
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
