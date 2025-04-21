@@ -41,11 +41,11 @@ public class ProjectSecurityConfig {
 //        return new InMemoryUserDetailsManager(user, admin);
 //    }
 
-    @Bean
-    public UserDetailsService userDetailsService(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource); //achraf@admin1234  -> $2a$12$Z0z25D.FQpJHSeH3t.H./uDabOEpK.Tjvta6s6zptZW66lfVbQnOq
-
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(DataSource dataSource) {
+//        return new JdbcUserDetailsManager(dataSource); //achraf@admin1234  -> $2a$12$Z0z25D.FQpJHSeH3t.H./uDabOEpK.Tjvta6s6zptZW66lfVbQnOq
+//
+//    }
 
 
     @Bean
