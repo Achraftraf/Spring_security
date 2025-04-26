@@ -1,5 +1,6 @@
 package com.eazybytes.config;
 
+import com.eazybytes.excpetionhandling.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.password.CompromisedPasswordChecker;
@@ -28,7 +29,9 @@ public class ProjectSecurityConfig {
                         .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
                         .requestMatchers("/notices", "/contact", "/error", "/register").permitAll());
         http.formLogin(withDefaults());
-        http.httpBasic(withDefaults());
+        http.httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
+//        http.httpBasic(withDefaults());
+//        http.httpBasic(withDefaults());
         return http.build();
     }
 
